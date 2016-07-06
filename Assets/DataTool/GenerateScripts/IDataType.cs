@@ -1,0 +1,9 @@
+namespace TEDTool.Data
+{
+	public interface IDataType
+	{
+		uint TypeID();
+		string DataPath();
+		void Load(string value);
+	}
+}
