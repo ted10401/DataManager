@@ -2,13 +2,26 @@
 
 DataManager 是一個簡易的本地資料庫工具，依據企劃內容來自動化產出相對應的程式嗎
 
-# 自動化腳本生成流程
+## Excel 資料範例
+|string/Key|int/Level|int/Hp|int/Exp|
+|1|1|10|10|
+|2|2|20|20|
+|3|3|30|30|
+|4|4|40|40|
+|5|5|50|50|
+|6|6|60|60|
+|7|7|70|70|
+|8|8|80|80|
+|9|9|90|90|
+|10|10|100|100|
+
+## 自動化腳本生成流程
 1. 使用 Excel 工具編輯資料表內容
 2. 將資料表匯出成 .csv 格式
 3. 將 .csv 檔案放入 DataTool/Resources/CsvResources/ 目錄下
 4. 點選 TEDTool/Data/Generate Script
 
-# 使用範例
+## 使用範例
 ```C#
 using UnityEngine;
 using System.Collections;
