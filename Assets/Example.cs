@@ -11,37 +11,37 @@ public class Example : MonoBehaviour
 		m_dataManager = new DataManager();
 		m_dataManager.Load();
 
-		LoadLevelData();
-		LoadMonsterData();
+		PrintPlayerData();
+		PrintMonsterData();
 	}
 
 
-	private void LoadLevelData()
+	private void PrintPlayerData()
 	{
-		LevelDataType levelDataType = m_dataManager.GetDataType<LevelDataType>();
-		LevelData levelData = null;
+		PlayerDataType playerDataType = m_dataManager.GetDataType<PlayerDataType>();
+		PlayerData playerData = null;
 		
-		for(int cnt = 0; cnt < levelDataType.GetCount(); cnt++)
+		for(int cnt = 0; cnt < playerDataType.GetCount(); cnt++)
 		{
-			levelData = levelDataType.GetData((cnt + 1).ToString());
+			playerData = playerDataType.GetData(cnt.ToString());
 
-			Debug.Log(string.Format("LevelData_{0} : Key = {1}, Level = {2}, Hp = {3}, Exp = {4}",
-			                        cnt + 1, levelData.Key, levelData.Level, levelData.Hp, levelData.Exp));
+			Debug.Log(string.Format("PlayerData_{0} : Key = {1}, Level = {2}, Hp = {3}, Exp = {4}",
+			                        cnt, playerData.Key, playerData.Level, playerData.Hp, playerData.Exp));
 		}
 	}
 
 
-	private void LoadMonsterData()
+	private void PrintMonsterData()
 	{
 		MonsterDataType monsterDataType = m_dataManager.GetDataType<MonsterDataType>();
 		MonsterData monsterData = null;
 		
 		for(int cnt = 0; cnt < monsterDataType.GetCount(); cnt++)
 		{
-			monsterData = monsterDataType.GetData((cnt + 1).ToString());
+			monsterData = monsterDataType.GetData(cnt.ToString());
 
 			Debug.Log(string.Format("MonsterData_{0} : Key = {1}, Name = {2}, Hp = {3}",
-			                        cnt + 1, monsterData.Key, monsterData.Name, monsterData.Hp));
+			                        cnt, monsterData.Key, monsterData.Name, monsterData.Hp));
 		}
 	}
 }

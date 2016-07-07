@@ -4,7 +4,7 @@ using TEDTool.Json;
 
 namespace TEDTool.Data
 {
-	public class LevelData
+	public class PlayerData
 	{
 		public string Key;
 		public int Level;
@@ -12,14 +12,14 @@ namespace TEDTool.Data
 		public int Exp;
 	}
 
-	public class LevelDataType : IDataType
+	public class PlayerDataType : IDataType
 	{
-		public const uint TYPE_ID = 1;
-		public const string DATA_PATH = "CsvResources/Level";
+		public const uint TYPE_ID = 2;
+		public const string DATA_PATH = "CsvResources/Player";
 
-		private LevelData[] m_datas;
+		private PlayerData[] m_datas;
 
-		public LevelDataType(){}
+		public PlayerDataType(){}
 
 		public uint TypeID ()
 		{
@@ -36,12 +36,12 @@ namespace TEDTool.Data
 		public void Load ()
 		{
 			TextAsset textData = Resources.Load<TextAsset>(DataPath());
-			string jsonData = CsvToJsonConverter.ConvertToJson<LevelData>(textData);
-			m_datas = JsonConverter.DeserializeClasses<LevelData> (jsonData);
+			string jsonData = CsvToJsonConverter.ConvertToJson<PlayerData>(textData);
+			m_datas = JsonConverter.DeserializeClasses<PlayerData> (jsonData);
 		}
 
 
-		public LevelData GetData(string key)
+		public PlayerData GetData(string key)
 		{
 			for(int cnt = 0; cnt < m_datas.Length; cnt++)
 			{

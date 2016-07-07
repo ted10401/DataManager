@@ -11,8 +11,8 @@ namespace TEDTool.Data
 		{
 			m_dataTypes = new Dictionary<uint, IDataType>();
 
-			RegisterDataType (new LevelDataType());
 			RegisterDataType (new MonsterDataType());
+			RegisterDataType (new PlayerDataType());
 
 			Load();
 		}

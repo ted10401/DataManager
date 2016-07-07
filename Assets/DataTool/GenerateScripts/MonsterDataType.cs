@@ -13,7 +13,7 @@ namespace TEDTool.Data
 
 	public class MonsterDataType : IDataType
 	{
-		public const uint TYPE_ID = 2;
+		public const uint TYPE_ID = 1;
 		public const string DATA_PATH = "CsvResources/Monster";
 
 		private MonsterData[] m_datas;
