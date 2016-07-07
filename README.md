@@ -2,6 +2,13 @@
 
 DataManager 是一個簡易的本地資料庫工具，依據企劃內容來自動化產出相對應的程式嗎
 
+## 支援資料型態
+* bool
+* float
+* int
+* string
+* List<string>
+
 ## Excel 資料範例
 ### Level.csv
 |string/Key|int/Level|int/Hp|int/Exp|
