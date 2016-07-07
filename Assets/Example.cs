@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TEDTool.Data;
-using TEDTool.Json;
 
 public class Example : MonoBehaviour
 {
