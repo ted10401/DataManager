@@ -1,15 +1,15 @@
 # DataManager
 
-DataManager is a simple client database tool, depending on the contents to generate the script automatically.
+DataManager 是一个简易的本地资料库工具，依据企划内容来自动化产出相对应的程式码
 
-## Support data type
+## 支援资料型态
 * bool
 * float
 * int
 * string
 * List\<string\>
 
-## Excel Example
+## Excel 资料范例
 ### Player.csv
 |string/Key|int/Level|int/Hp|int/Exp|
 |:-------------:|:-------------:|:-------------:|:-------------:|
@@ -24,7 +24,7 @@ DataManager is a simple client database tool, depending on the contents to gener
 |8	|9	|90	|90|
 |9	|10	|100	|100|
 
-The class after generate automatically
+转换后类别
 ```C#
 public class PlayerData
 {
@@ -48,7 +48,7 @@ public class PlayerData
 |8	|Monster_9	|90	|
 |9	|Monster_10	|100	|
 
-The class after generate automatically
+转换后类别
 ```C#
 public class MonsterData
 {
@@ -58,13 +58,13 @@ public class MonsterData
 }
 ```
 
-## Generate script workflow
-1. Use Excel to edit the database content
-2. Export Excel database to .csv file
-3. Put .csv to DataTool/Resources/CsvResources/
-4. Click TEDTool/Data/Generate Script
+## 自动化脚本生成流程
+1. 使用 Excel 工具编辑资料表内容
+2. 将资料表汇出成 .csv 格式
+3. 将 .csv 档案放入 DataTool/Resources/CsvResources/ 目录下
+4. 点选 TEDTool/Data/Generate Script
 
-## Method Example
+## 使用范例
 ```C#
 using UnityEngine;
 using System.Collections;
