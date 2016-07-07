@@ -7,28 +7,13 @@ using System.Reflection;
 
 public class CsvToJsonConverter
 {
-	private static string INPUT_PATH = Application.dataPath + "/DataTool/CsvResources/";
-	public static string OUTPUT_PATH = Application.dataPath + "/Resources/Database/";
-	private static string CONVERT_FORMAT = ".json";
-
-	public static void Convert<T>(string path) where T : new()
+	public static string ConvertToJson<T>(TextAsset csvDatas) where T : new()
 	{
-		TextAsset csvDatas = LoadCSV (INPUT_PATH + path + ".csv");
-
 		string[][] csvData = SerializeCSV(csvDatas);
 
 		object outputData = CsvToJson<T>(csvDatas.name, csvData);
 
-		SaveData (csvDatas.name, outputData);
-	}
-
-
-	private static TextAsset LoadCSV(string csvPath)
-	{
-		string assetPath = "Assets" + csvPath.Replace(Application.dataPath, "").Replace('\\', '/');
-		TextAsset textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath(assetPath, typeof(TextAsset));
-		
-		return textAsset;
+		return JsonWriter.Serialize (outputData);
 	}
 
 
@@ -80,21 +65,6 @@ public class CsvToJsonConverter
 		}
 		
 		return outputData;
-	}
-
-
-	private static void SaveData(string fileName, object outputData)
-	{
-		string dataName = OUTPUT_PATH + fileName + CONVERT_FORMAT;
-		
-		if (File.Exists(dataName))
-		{
-			File.Delete(dataName);
-		}
-		
-		StreamWriter sr = File.CreateText(dataName);
-		sr.WriteLine (JsonWriter.Serialize (outputData));
-		sr.Close();
 	}
 
 

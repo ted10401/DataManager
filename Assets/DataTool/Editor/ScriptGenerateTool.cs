@@ -10,8 +10,7 @@ public class ScriptGenerateTool
 	private static string TEMPLATE_IDATATYPE_PATH = "Assets/DataTool/Editor/Template_IDataType.txt";
 	private static string TEMPLATE_DATATYPE_PATH = "Assets/DataTool/Editor/Template_DataType.txt";
 	private static string TEMPLATE_DATAMANAGER_PATH = "Assets/DataTool/Editor/Template_DataManager.txt";
-	private static string TEMPLATE_DATA_GENERATE_TOOL_PATH = "Assets/DataTool/Editor/Template_DataGenerateTool.txt";
-	private static string CSV_PATH = Application.dataPath + "/DataTool/CsvResources/";
+	private static string CSV_PATH = Application.dataPath + "/DataTool/Resources/CsvResources/";
 
 	private static int DATA_ID;
 	private static string REGISTER_LIST;
@@ -24,7 +23,6 @@ public class ScriptGenerateTool
 		CreateIDataTypeScript();
 		CreateDataTypeScript();
 		CreateDataManagerScript();
-		CreateDataGenerateToolScript();
 
 		AssetDatabase.Refresh();
 		Debug.Log("Auto generate scripts finished.");
@@ -94,17 +92,9 @@ public class ScriptGenerateTool
 		template = template.Replace("$DataAttributes", parameters);
 		template = template.Replace("$DataTypeName", textAsset.name + "DataType");
 		template = template.Replace("$DataID", DATA_ID.ToString());
-		template = template.Replace("$DataPath", "\"Database/" + textAsset.name + "\"");
+		template = template.Replace("$DataPath", "\"CsvResources/" + textAsset.name + "\"");
 		
 		GenerateScript(textAsset.name + "DataType", template);
-	}
-
-
-	private static void CreateDataGenerateToolScript()
-	{
-		string template = GetTemplate(TEMPLATE_DATA_GENERATE_TOOL_PATH);
-		template = template.Replace("$ConvertList", CONVERT_LIST);
-		GenerateTool("DataGenerateTool", template);
 	}
 
 

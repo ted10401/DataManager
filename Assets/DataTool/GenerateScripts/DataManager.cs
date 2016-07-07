@@ -22,10 +22,7 @@ namespace TEDTool.Data
 		{
 			foreach(KeyValuePair<uint, IDataType> data in m_dataTypes)
 			{
-				TextAsset textData = Resources.Load<TextAsset>(data.Value.DataPath());
-				string json = textData.text;
-
-				data.Value.Load(json);
+				data.Value.Load();
 			}
 		}
 

@@ -14,7 +14,7 @@ namespace TEDTool.Data
 	public class MonsterDataType : IDataType
 	{
 		public const uint TYPE_ID = 2;
-		public const string DATA_PATH = "Database/Monster";
+		public const string DATA_PATH = "CsvResources/Monster";
 
 		private MonsterData[] m_datas;
 
@@ -32,9 +32,11 @@ namespace TEDTool.Data
 		}
 
 
-		public void Load (string value)
+		public void Load ()
 		{
-			m_datas = JsonConverter.DeserializeClasses<MonsterData> (value);
+			TextAsset textData = Resources.Load<TextAsset>(DataPath());
+			string jsonData = CsvToJsonConverter.ConvertToJson<MonsterData>(textData);
+			m_datas = JsonConverter.DeserializeClasses<MonsterData> (jsonData);
 		}
 
 

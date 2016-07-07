@@ -4,6 +4,6 @@ namespace TEDTool.Data
 	{
 		uint TypeID();
 		string DataPath();
-		void Load(string value);
+		void Load();
 	}
 }

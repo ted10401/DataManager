@@ -15,7 +15,7 @@ namespace TEDTool.Data
 	public class LevelDataType : IDataType
 	{
 		public const uint TYPE_ID = 1;
-		public const string DATA_PATH = "Database/Level";
+		public const string DATA_PATH = "CsvResources/Level";
 
 		private LevelData[] m_datas;
 
@@ -33,9 +33,11 @@ namespace TEDTool.Data
 		}
 
 
-		public void Load (string value)
+		public void Load ()
 		{
-			m_datas = JsonConverter.DeserializeClasses<LevelData> (value);
+			TextAsset textData = Resources.Load<TextAsset>(DataPath());
+			string jsonData = CsvToJsonConverter.ConvertToJson<LevelData>(textData);
+			m_datas = JsonConverter.DeserializeClasses<LevelData> (jsonData);
 		}
 
 

@@ -30,9 +30,11 @@ namespace TEDTool.Data
 		}
 
 
-		public void Load (string value)
+		public void Load ()
 		{
-			m_datas = JsonConverter.DeserializeClasses<$DataClassName> (value);
+			TextAsset textData = Resources.Load<TextAsset>(DataPath());
+			string jsonData = CsvToJsonConverter.ConvertToJson<$DataClassName>(textData);
+			m_datas = JsonConverter.DeserializeClasses<$DataClassName> (jsonData);
 		}
 
 
