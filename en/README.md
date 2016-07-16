@@ -37,6 +37,7 @@ public class PlayerData
 	public int Exp;
 }
 ```
+
 ### Monster.csv
 |string/Key|string/Name|int/Hp|
 |:-------------:|:-------------:|:-------------:|
@@ -60,6 +61,8 @@ public class MonsterData
 	public int Hp;
 }
 ```
+
+### Weapon.csv
 |string/Key	|string/Name	|int[]/Atk	|string[]/Rarity|
 |:-------------:|:-------------:|:-------------:|:-------------:|
 |1	|Sword_01	|1;2;3;4;5	|Basic;Common;Rare;Epic;Legendary|
