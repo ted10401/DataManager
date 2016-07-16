@@ -75,6 +75,7 @@ public class MonsterData
 |8	|Sword_08	|8;9;10;11;12	|Basic;Common;Rare;Epic;Legendary|
 |9	|Sword_09	|9;10;11;12;13	|Basic;Common;Rare;Epic;Legendary|
 |10	|Sword_10	|10;11;12;13;14	|Basic;Common;Rare;Epic;Legendary|
+
 The class after generate automatically
 ```C#
 public class WeaponData
