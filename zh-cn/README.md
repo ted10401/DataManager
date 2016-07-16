@@ -68,16 +68,16 @@ public class MonsterData
 ```C#
 using UnityEngine;
 using System.Collections;
-using TEDTool.Data;
+using TEDTool.Database;
 
 public class Example : MonoBehaviour
 {
-	private DataManager m_dataManager;
+	private DatabaseManager m_databaseManager;
 
 	void Awake()
 	{
-		m_dataManager = new DataManager();
-		m_dataManager.Load();
+		m_databaseManager = new DatabaseManager();
+		m_databaseManager.Load();
 
 		PrintPlayerData();
 		PrintMonsterData();
@@ -86,7 +86,7 @@ public class Example : MonoBehaviour
 
 	private void PrintPlayerData()
 	{
-		PlayerDataType playerDataType = m_dataManager.GetDataType<PlayerDataType>();
+		PlayerDatabase playerDataType = m_databaseManager.GetDatabase<PlayerDatabase>();
 		PlayerData playerData = null;
 		
 		for(int cnt = 0; cnt < playerDataType.GetCount(); cnt++)
@@ -101,7 +101,7 @@ public class Example : MonoBehaviour
 
 	private void PrintMonsterData()
 	{
-		MonsterDataType monsterDataType = m_dataManager.GetDataType<MonsterDataType>();
+		MonsterDatabase monsterDataType = m_databaseManager.GetDatabase<MonsterDatabase>();
 		MonsterData monsterData = null;
 		
 		for(int cnt = 0; cnt < monsterDataType.GetCount(); cnt++)
