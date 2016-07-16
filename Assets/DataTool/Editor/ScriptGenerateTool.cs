@@ -85,11 +85,10 @@ public class ScriptGenerateTool
 	{
 		DATA_ID++;
 		
-		string parameters = GetClassParameters(textAsset);
-		
 		string template = GetTemplate(TEMPLATE_DATATYPE_PATH);
 		template = template.Replace("$DataClassName", textAsset.name + "Data");
-		template = template.Replace("$DataAttributes", parameters);
+		template = template.Replace("$DataAttributes", GetClassParameters(textAsset));
+		template = template.Replace("$CsvSerialize", GetCsvSerialize(textAsset));
 		template = template.Replace("$DataTypeName", textAsset.name + "DataType");
 		template = template.Replace("$DataID", DATA_ID.ToString());
 		template = template.Replace("$DataPath", "\"CsvResources/" + textAsset.name + "\"");
@@ -100,7 +99,7 @@ public class ScriptGenerateTool
 
 	private static string GetClassParameters(TextAsset textAsset)
 	{
-		string[][] csvData = CsvToJsonConverter.SerializeCSV(textAsset);
+		string[][] csvData = CsvConverter.SerializeCSV(textAsset);
 		int keyCount = csvData[0].Length;
 		
 		string classParameters = string.Empty;
@@ -118,6 +117,62 @@ public class ScriptGenerateTool
 		}
 
 		return classParameters;
+	}
+
+
+	private static string GetCsvSerialize(TextAsset textAsset)
+	{
+		string[][] csvData = CsvConverter.SerializeCSV(textAsset);
+		int keyCount = csvData[0].Length;
+		
+		string csvSerialize = string.Empty;
+		
+		for(int cnt = 0; cnt < keyCount; cnt++)
+		{
+			string[] attributes = csvData[0][cnt].Split(new char[]{'/'}, System.StringSplitOptions.RemoveEmptyEntries);
+			
+			if(attributes[0] == "string")
+			{
+				csvSerialize += string.Format("m_tempData.{0} = m_datas[keyValue][{1}];", attributes[1], cnt);
+			}
+			else if(attributes[0] == "bool")
+			{
+				csvSerialize += GetCsvSerialize(attributes, cnt, "false");
+			}
+			else if(attributes[0] == "int")
+			{
+				csvSerialize += GetCsvSerialize(attributes, cnt, "0");
+			}
+			else if(attributes[0] == "float")
+			{
+				csvSerialize += GetCsvSerialize(attributes, cnt, "0.0f");
+			}
+			else if(attributes[0] == "List<string>")
+			{
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertStringToList(m_datas[keyValue][{1}]);", attributes[1], cnt);
+			}
+			
+			if(cnt != keyCount - 1)
+			{
+				csvSerialize += "\n";
+				csvSerialize += "\t\t\t";
+			}
+		}
+		
+		return csvSerialize;
+	}
+	
+	
+	private static string GetCsvSerialize(string[] attributes, int arrayCount, string defaultValue)
+	{
+		string csvSerialize = "";
+		
+		csvSerialize += string.Format("\n\t\t\tif(!{0}.TryParse(m_datas[keyValue][{1}], out m_tempData.{2}))\n", attributes[0], arrayCount, attributes[1]);
+		csvSerialize += "\t\t\t{\n";
+		csvSerialize += string.Format("\t\t\t\tm_tempData.{0} = {1};\n", attributes[1], defaultValue);
+		csvSerialize += "\t\t\t}\n";
+		
+		return csvSerialize;
 	}
 
 

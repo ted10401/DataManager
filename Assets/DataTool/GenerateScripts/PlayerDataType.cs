@@ -17,7 +17,8 @@ namespace TEDTool.Data
 		public const uint TYPE_ID = 2;
 		public const string DATA_PATH = "CsvResources/Player";
 
-		private PlayerData[] m_datas;
+		private PlayerData m_tempData = new PlayerData();
+		private string[][] m_datas;
 
 		public PlayerDataType(){}
 
@@ -36,22 +37,41 @@ namespace TEDTool.Data
 		public void Load ()
 		{
 			TextAsset textData = Resources.Load<TextAsset>(DataPath());
-			string jsonData = CsvToJsonConverter.ConvertToJson<PlayerData>(textData);
-			m_datas = JsonConverter.DeserializeClasses<PlayerData> (jsonData);
+			m_datas = CsvConverter.SerializeCSV(textData);
 		}
 
 
 		public PlayerData GetData(string key)
 		{
-			for(int cnt = 0; cnt < m_datas.Length; cnt++)
+			int keyValue = 0;
+			
+			if(!int.TryParse(key, out keyValue))
+				return null;
+
+			if(keyValue >= m_datas.Length)
+				return null;
+				
+			m_tempData.Key = m_datas[keyValue][0];
+			
+			if(!int.TryParse(m_datas[keyValue][1], out m_tempData.Level))
 			{
-				if(m_datas[cnt].Key == key)
-				{
-					return m_datas[cnt];
-				}
+				m_tempData.Level = 0;
 			}
 
-			return null;
+			
+			if(!int.TryParse(m_datas[keyValue][2], out m_tempData.Hp))
+			{
+				m_tempData.Hp = 0;
+			}
+
+			
+			if(!int.TryParse(m_datas[keyValue][3], out m_tempData.Exp))
+			{
+				m_tempData.Exp = 0;
+			}
+
+			
+			return m_tempData;
 		}
 
 

@@ -16,7 +16,8 @@ namespace TEDTool.Data
 		public const uint TYPE_ID = 1;
 		public const string DATA_PATH = "CsvResources/Monster";
 
-		private MonsterData[] m_datas;
+		private MonsterData m_tempData = new MonsterData();
+		private string[][] m_datas;
 
 		public MonsterDataType(){}
 
@@ -35,22 +36,30 @@ namespace TEDTool.Data
 		public void Load ()
 		{
 			TextAsset textData = Resources.Load<TextAsset>(DataPath());
-			string jsonData = CsvToJsonConverter.ConvertToJson<MonsterData>(textData);
-			m_datas = JsonConverter.DeserializeClasses<MonsterData> (jsonData);
+			m_datas = CsvConverter.SerializeCSV(textData);
 		}
 
 
 		public MonsterData GetData(string key)
 		{
-			for(int cnt = 0; cnt < m_datas.Length; cnt++)
+			int keyValue = 0;
+			
+			if(!int.TryParse(key, out keyValue))
+				return null;
+
+			if(keyValue >= m_datas.Length)
+				return null;
+				
+			m_tempData.Key = m_datas[keyValue][0];
+			m_tempData.Name = m_datas[keyValue][1];
+			
+			if(!int.TryParse(m_datas[keyValue][2], out m_tempData.Hp))
 			{
-				if(m_datas[cnt].Key == key)
-				{
-					return m_datas[cnt];
-				}
+				m_tempData.Hp = 0;
 			}
 
-			return null;
+			
+			return m_tempData;
 		}
 
 

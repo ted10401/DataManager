@@ -14,7 +14,8 @@ namespace TEDTool.Data
 		public const uint TYPE_ID = $DataID;
 		public const string DATA_PATH = $DataPath;
 
-		private $DataClassName[] m_datas;
+		private $DataClassName m_tempData = new $DataClassName();
+		private string[][] m_datas;
 
 		public $DataTypeName(){}
 
@@ -33,22 +34,23 @@ namespace TEDTool.Data
 		public void Load ()
 		{
 			TextAsset textData = Resources.Load<TextAsset>(DataPath());
-			string jsonData = CsvToJsonConverter.ConvertToJson<$DataClassName>(textData);
-			m_datas = JsonConverter.DeserializeClasses<$DataClassName> (jsonData);
+			m_datas = CsvConverter.SerializeCSV(textData);
 		}
 
 
 		public $DataClassName GetData(string key)
 		{
-			for(int cnt = 0; cnt < m_datas.Length; cnt++)
-			{
-				if(m_datas[cnt].Key == key)
-				{
-					return m_datas[cnt];
-				}
-			}
+			int keyValue = 0;
+			
+			if(!int.TryParse(key, out keyValue))
+				return null;
 
-			return null;
+			if(keyValue >= m_datas.Length)
+				return null;
+				
+			$CsvSerialize
+			
+			return m_tempData;
 		}
 
 
