@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace TEDTool.Data
+namespace TEDTool.Database
 {
 	public class $DataClassName
 	{
 		$DataAttributes
 	}
 
-	public class $DataTypeName : IDataType
+	public class $DataTypeName : IDatabase
 	{
 		public const uint TYPE_ID = $DataID;
 		public const string DATA_PATH = $DataPath;

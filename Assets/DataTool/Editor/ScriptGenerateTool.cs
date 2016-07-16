@@ -7,25 +7,25 @@ public class ScriptGenerateTool
 {
 	private static string GENERATE_SCRIPT_PATH = Application.dataPath + "/DataTool/GenerateScripts/";
 	private static string EDITOR_PATH = Application.dataPath + "/DataTool/Editor/";
-	private static string TEMPLATE_IDATATYPE_PATH = "Assets/DataTool/Editor/Template_IDataType.txt";
-	private static string TEMPLATE_DATATYPE_PATH = "Assets/DataTool/Editor/Template_DataType.txt";
-	private static string TEMPLATE_DATAMANAGER_PATH = "Assets/DataTool/Editor/Template_DataManager.txt";
+	private static string TEMPLATE_IDATABASE_PATH = "Assets/DataTool/Editor/Template_IDatabase.txt";
+	private static string TEMPLATE_DATABASE_PATH = "Assets/DataTool/Editor/Template_Database.txt";
+	private static string TEMPLATE_DATABASEMANAGER_PATH = "Assets/DataTool/Editor/Template_DatabaseManager.txt";
 	private static string CSV_PATH = Application.dataPath + "/DataTool/Resources/CsvResources/";
 
 	private static int DATA_ID;
 	private static string REGISTER_LIST;
 	private static string CONVERT_LIST;
 
-	[MenuItem("TEDTool/Data/Generate Script")]
+	[MenuItem("TEDTool/Database/Generate Script")]
 	public static void GenerateScript()
 	{
 		Initialize();
-		CreateIDataTypeScript();
-		CreateDataTypeScript();
-		CreateDataManagerScript();
+		CreateIDatabaseScript();
+		CreateDatabaseScript();
+		CreateDatabaseManagerScript();
 
 		AssetDatabase.Refresh();
-		Debug.Log("Auto generate scripts finished.");
+		Debug.Log("Database scripts generate have completed.");
 	}
 
 
@@ -42,14 +42,14 @@ public class ScriptGenerateTool
 	}
 
 
-	private static void CreateIDataTypeScript()
+	private static void CreateIDatabaseScript()
 	{
-		string template = GetTemplate(TEMPLATE_IDATATYPE_PATH);
-		GenerateScript("IDataType", template);
+		string template = GetTemplate(TEMPLATE_IDATABASE_PATH);
+		GenerateScript("IDatabase", template);
 	}
 
 
-	private static void CreateDataTypeScript()
+	private static void CreateDatabaseScript()
 	{
 		string[] csvPaths = Directory.GetFiles(CSV_PATH, "*.csv", SearchOption.AllDirectories);
 		string assetPath = "";
@@ -60,7 +60,7 @@ public class ScriptGenerateTool
 			assetPath = "Assets" + csvPaths[cnt].Replace(Application.dataPath, "").Replace('\\', '/');
 			textAsset = (TextAsset)AssetDatabase.LoadAssetAtPath(assetPath, typeof(TextAsset));
 
-			REGISTER_LIST += string.Format("RegisterDataType (new {0}DataType());\n", textAsset.name);
+			REGISTER_LIST += string.Format("RegisterDataType (new {0}Database());\n", textAsset.name);
 			if(cnt != csvPaths.Length - 1)
 				REGISTER_LIST += "\t\t\t";
 			
@@ -68,32 +68,32 @@ public class ScriptGenerateTool
 			if(cnt != csvPaths.Length - 1)
 				CONVERT_LIST += "\t\t\t";
 
-			CreateDataTypeScript(textAsset);
+			CreateDatabaseScript(textAsset);
 		}
 	}
 
 
-	private static void CreateDataManagerScript()
+	private static void CreateDatabaseManagerScript()
 	{
-		string template = GetTemplate(TEMPLATE_DATAMANAGER_PATH);
+		string template = GetTemplate(TEMPLATE_DATABASEMANAGER_PATH);
 		template = template.Replace("$RegisterList", REGISTER_LIST);
-		GenerateScript("DataManager", template);
+		GenerateScript("DatabaseManager", template);
 	}
 
 
-	private static void CreateDataTypeScript(TextAsset textAsset)
+	private static void CreateDatabaseScript(TextAsset textAsset)
 	{
 		DATA_ID++;
 		
-		string template = GetTemplate(TEMPLATE_DATATYPE_PATH);
+		string template = GetTemplate(TEMPLATE_DATABASE_PATH);
 		template = template.Replace("$DataClassName", textAsset.name + "Data");
 		template = template.Replace("$DataAttributes", GetClassParameters(textAsset));
 		template = template.Replace("$CsvSerialize", GetCsvSerialize(textAsset));
-		template = template.Replace("$DataTypeName", textAsset.name + "DataType");
+		template = template.Replace("$DataTypeName", textAsset.name + "Database");
 		template = template.Replace("$DataID", DATA_ID.ToString());
 		template = template.Replace("$DataPath", "\"CsvResources/" + textAsset.name + "\"");
 		
-		GenerateScript(textAsset.name + "DataType", template);
+		GenerateScript(textAsset.name + "Database", template);
 	}
 
 

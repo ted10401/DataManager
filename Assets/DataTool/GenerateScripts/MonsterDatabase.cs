@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace TEDTool.Data
+namespace TEDTool.Database
 {
 	public class MonsterData
 	{
@@ -10,7 +10,7 @@ namespace TEDTool.Data
 		public int Hp;
 	}
 
-	public class MonsterDataType : IDataType
+	public class MonsterDatabase : IDatabase
 	{
 		public const uint TYPE_ID = 1;
 		public const string DATA_PATH = "CsvResources/Monster";
@@ -18,7 +18,7 @@ namespace TEDTool.Data
 		private MonsterData m_tempData = new MonsterData();
 		private string[][] m_datas;
 
-		public MonsterDataType(){}
+		public MonsterDatabase(){}
 
 		public uint TypeID ()
 		{

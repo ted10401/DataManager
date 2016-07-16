@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace TEDTool.Data
+namespace TEDTool.Database
 {
 	public class PlayerData
 	{
@@ -11,7 +11,7 @@ namespace TEDTool.Data
 		public int Exp;
 	}
 
-	public class PlayerDataType : IDataType
+	public class PlayerDatabase : IDatabase
 	{
 		public const uint TYPE_ID = 2;
 		public const string DATA_PATH = "CsvResources/Player";
@@ -19,7 +19,7 @@ namespace TEDTool.Data
 		private PlayerData m_tempData = new PlayerData();
 		private string[][] m_datas;
 
-		public PlayerDataType(){}
+		public PlayerDatabase(){}
 
 		public uint TypeID ()
 		{

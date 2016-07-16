@@ -1,6 +1,6 @@
-namespace TEDTool.Data
+namespace TEDTool.Database
 {
-	public interface IDataType
+	public interface IDatabase
 	{
 		uint TypeID();
 		string DataPath();
