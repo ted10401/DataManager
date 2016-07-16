@@ -7,7 +7,10 @@ DataManager is a simple client database tool, depending on the contents to gener
 * float
 * int
 * string
-* List\<string\>
+* bool[]
+* float[]
+* int[]
+* string[]
 
 ## Excel Example
 ### Player.csv
