@@ -1,0 +1,11 @@
+string/Key,string/Name,int[]/Atk,string[]/Rarity
+1,Sword_01,1;2;3;4;5,Basic;Common;Rare;Epic;Legendary
+2,Sword_02,2;3;4;5;6,Basic;Common;Rare;Epic;Legendary
+3,Sword_03,3;4;5;6;7,Basic;Common;Rare;Epic;Legendary
+4,Sword_04,4;5;6;7;8,Basic;Common;Rare;Epic;Legendary
+5,Sword_05,5;6;7;8;9,Basic;Common;Rare;Epic;Legendary
+6,Sword_06,6;7;8;9;10,Basic;Common;Rare;Epic;Legendary
+7,Sword_07,7;8;9;10;11,Basic;Common;Rare;Epic;Legendary
+8,Sword_08,8;9;10;11;12,Basic;Common;Rare;Epic;Legendary
+9,Sword_09,9;10;11;12;13,Basic;Common;Rare;Epic;Legendary
+10,Sword_10,10;11;12;13;14,Basic;Common;Rare;Epic;Legendary

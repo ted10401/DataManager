@@ -40,7 +40,7 @@ namespace TEDTool.Database
 		}
 
 
-		public PlayerData GetData(string key)
+		public PlayerData GetDataByKey(string key)
 		{
 			int keyValue = 0;
 			

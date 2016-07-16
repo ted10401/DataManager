@@ -39,7 +39,7 @@ namespace TEDTool.Database
 		}
 
 
-		public MonsterData GetData(string key)
+		public MonsterData GetDataByKey(string key)
 		{
 			int keyValue = 0;
 			

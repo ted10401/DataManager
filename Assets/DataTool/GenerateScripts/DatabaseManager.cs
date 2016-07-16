@@ -13,6 +13,7 @@ namespace TEDTool.Database
 
 			RegisterDataType (new MonsterDatabase());
 			RegisterDataType (new PlayerDatabase());
+			RegisterDataType (new WeaponDatabase());
 
 			Load();
 		}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class CsvConverter
 {
@@ -19,19 +20,32 @@ public class CsvConverter
 	}
 	
 	
-	public static List<string> ConvertStringToList(string value)
+	public static T[] ConvertToArray<T>(string value)
 	{
-		List<string> data = new List<string> ();
 		string[] temp = value.Split (';');
+
+		int arrayLength = 0;
 		
 		for(int cnt = 0; cnt < temp.Length; cnt++)
 		{
 			if(string.IsNullOrEmpty(temp[cnt]))
 				continue;
 			
-			data.Add(temp[cnt]);
+			arrayLength++;
+		}
+
+		T[] array = new T[arrayLength];
+		int pointer = 0;
+
+		for(int cnt = 0; cnt < temp.Length; cnt++)
+		{
+			if(string.IsNullOrEmpty(temp[cnt]))
+				continue;
+
+			array[pointer] = (T)Convert.ChangeType(temp[cnt], typeof(T));
+			pointer++;
 		}
 		
-		return data;
+		return array;
 	}
 }

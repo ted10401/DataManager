@@ -147,9 +147,21 @@ public class ScriptGenerateTool
 			{
 				csvSerialize += GetCsvSerialize(attributes, cnt, "0.0f");
 			}
-			else if(attributes[0] == "List<string>")
+			else if(attributes[0] == "string[]")
 			{
-				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertStringToList(m_datas[keyValue][{1}]);", attributes[1], cnt);
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<string>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+			}
+			else if(attributes[0] == "bool[]")
+			{
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<bool>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+			}
+			else if(attributes[0] == "int[]")
+			{
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<int>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+			}
+			else if(attributes[0] == "float[]")
+			{
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<float>(m_datas[keyValue][{1}]);", attributes[1], cnt);
 			}
 			
 			if(cnt != keyCount - 1)

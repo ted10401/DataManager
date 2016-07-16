@@ -3,20 +3,23 @@ using System.Collections.Generic;
 
 namespace TEDTool.Database
 {
-	public class $DataClassName
+	public class WeaponData
 	{
-		$DataAttributes
+		public string Key;
+		public string Name;
+		public int[] Atk;
+		public string[] Rarity;
 	}
 
-	public class $DataTypeName : IDatabase
+	public class WeaponDatabase : IDatabase
 	{
-		public const uint TYPE_ID = $DataID;
-		public const string DATA_PATH = $DataPath;
+		public const uint TYPE_ID = 3;
+		public const string DATA_PATH = "CsvResources/Weapon";
 
-		private $DataClassName m_tempData = new $DataClassName();
+		private WeaponData m_tempData = new WeaponData();
 		private string[][] m_datas;
 
-		public $DataTypeName(){}
+		public WeaponDatabase(){}
 
 		public uint TypeID ()
 		{
@@ -37,7 +40,7 @@ namespace TEDTool.Database
 		}
 
 
-		public $DataClassName GetDataByKey(string key)
+		public WeaponData GetDataByKey(string key)
 		{
 			int keyValue = 0;
 			
@@ -47,7 +50,10 @@ namespace TEDTool.Database
 			if(keyValue >= m_datas.Length)
 				return null;
 				
-			$CsvSerialize
+			m_tempData.Key = m_datas[keyValue][0];
+			m_tempData.Name = m_datas[keyValue][1];
+			m_tempData.Atk = CsvConverter.ConvertToArray<int>(m_datas[keyValue][2]);
+			m_tempData.Rarity = CsvConverter.ConvertToArray<string>(m_datas[keyValue][3]);
 			
 			return m_tempData;
 		}
