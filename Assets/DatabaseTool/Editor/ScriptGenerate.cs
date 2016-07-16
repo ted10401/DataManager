@@ -3,7 +3,7 @@ using UnityEditor;
 using System;
 using System.IO;
 
-public class ScriptGenerateTool
+public class ScriptGenerate
 {
 	private static string GENERATE_SCRIPT_PATH = Application.dataPath + "/DataTool/GenerateScripts/";
 	private static string EDITOR_PATH = Application.dataPath + "/DataTool/Editor/";

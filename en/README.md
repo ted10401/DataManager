@@ -86,8 +86,8 @@ public class WeaponData
 ## Generate script workflow
 1. Use Excel to edit the database content
 2. Export Excel database to .csv file
-3. Put .csv to DataTool/Resources/CsvResources/
-4. Click TEDTool/Data/Generate Script
+3. Put .csv to DatabaseTool/Resources/CsvResources/
+4. Click TEDTool/Database/Generate Script
 
 ## Method Example
 ```C#

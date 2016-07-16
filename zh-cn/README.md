@@ -86,8 +86,8 @@ public class WeaponData
 ## 自动化脚本生成流程
 1. 使用 Excel 工具编辑资料表内容
 2. 将资料表汇出成 .csv 格式
-3. 将 .csv 档案放入 DataTool/Resources/CsvResources/ 目录下
-4. 点选 TEDTool/Data/Generate Script
+3. 将 .csv 档案放入 DatabaseTool/Resources/CsvResources/ 目录下
+4. 点选 TEDTool/Database/Generate Script
 
 ## 使用范例
 ```C#
