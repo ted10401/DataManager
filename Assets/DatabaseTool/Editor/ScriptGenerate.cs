@@ -5,12 +5,12 @@ using System.IO;
 
 public class ScriptGenerate
 {
-	private static string GENERATE_SCRIPT_PATH = Application.dataPath + "/DataTool/GenerateScripts/";
-	private static string EDITOR_PATH = Application.dataPath + "/DataTool/Editor/";
-	private static string TEMPLATE_IDATABASE_PATH = "Assets/DataTool/Editor/Template_IDatabase.txt";
-	private static string TEMPLATE_DATABASE_PATH = "Assets/DataTool/Editor/Template_Database.txt";
-	private static string TEMPLATE_DATABASEMANAGER_PATH = "Assets/DataTool/Editor/Template_DatabaseManager.txt";
-	private static string CSV_PATH = Application.dataPath + "/DataTool/Resources/CsvResources/";
+	private static string GENERATE_SCRIPT_PATH = Application.dataPath + "/DatabaseTool/GenerateScripts/";
+	private static string EDITOR_PATH = Application.dataPath + "/DatabaseTool/Editor/";
+	private static string TEMPLATE_IDATABASE_PATH = "Assets/DatabaseTool/Editor/Template_IDatabase.txt";
+	private static string TEMPLATE_DATABASE_PATH = "Assets/DatabaseTool/Editor/Template_Database.txt";
+	private static string TEMPLATE_DATABASEMANAGER_PATH = "Assets/DatabaseTool/Editor/Template_DatabaseManager.txt";
+	private static string CSV_PATH = Application.dataPath + "/DatabaseTool/Resources/CsvResources/";
 
 	private static int DATA_ID;
 	private static string REGISTER_LIST;
