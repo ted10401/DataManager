@@ -57,6 +57,28 @@ public class MonsterData
 	public int Hp;
 }
 ```
+|string/Key	|string/Name	|int[]/Atk	|string[]/Rarity|
+|:-------------:|:-------------:|:-------------:|:-------------:|
+|1	|Sword_01	|1;2;3;4;5	|Basic;Common;Rare;Epic;Legendary|
+|2	|Sword_02	|2;3;4;5;6	|Basic;Common;Rare;Epic;Legendary|
+|3	|Sword_03	|3;4;5;6;7	|Basic;Common;Rare;Epic;Legendary|
+|4	|Sword_04	|4;5;6;7;8	|Basic;Common;Rare;Epic;Legendary|
+|5	|Sword_05	|5;6;7;8;9	|Basic;Common;Rare;Epic;Legendary|
+|6	|Sword_06	|6;7;8;9;10	|Basic;Common;Rare;Epic;Legendary|
+|7	|Sword_07	|7;8;9;10;11	|Basic;Common;Rare;Epic;Legendary|
+|8	|Sword_08	|8;9;10;11;12	|Basic;Common;Rare;Epic;Legendary|
+|9	|Sword_09	|9;10;11;12;13	|Basic;Common;Rare;Epic;Legendary|
+|10	|Sword_10	|10;11;12;13;14	|Basic;Common;Rare;Epic;Legendary|
+The class after generate automatically
+```C#
+public class WeaponData
+{
+	public string Key;
+	public string Name;
+	public int[] Atk;
+	public string[] Rarity;
+}
+```
 
 ## Generate script workflow
 1. Use Excel to edit the database content
@@ -81,17 +103,18 @@ public class Example : MonoBehaviour
 
 		PrintPlayerData();
 		PrintMonsterData();
+		PrintWeaponData();
 	}
 
 
 	private void PrintPlayerData()
 	{
-		PlayerDatabase playerDataType = m_databaseManager.GetDatabase<PlayerDatabase>();
+		PlayerDatabase playerDatabase = m_databaseManager.GetDatabase<PlayerDatabase>();
 		PlayerData playerData = null;
 		
-		for(int cnt = 0; cnt < playerDataType.GetCount(); cnt++)
+		for(int cnt = 1; cnt < playerDatabase.GetCount(); cnt++)
 		{
-			playerData = playerDataType.GetData(cnt.ToString());
+			playerData = playerDatabase.GetDataByKey(cnt.ToString());
 
 			Debug.Log(string.Format("PlayerData_{0} : Key = {1}, Level = {2}, Hp = {3}, Exp = {4}",
 			                        cnt, playerData.Key, playerData.Level, playerData.Hp, playerData.Exp));
@@ -101,15 +124,40 @@ public class Example : MonoBehaviour
 
 	private void PrintMonsterData()
 	{
-		MonsterDatabase monsterDataType = m_databaseManager.GetDatabase<MonsterDatabase>();
+		MonsterDatabase monsterDatabase = m_databaseManager.GetDatabase<MonsterDatabase>();
 		MonsterData monsterData = null;
 		
-		for(int cnt = 0; cnt < monsterDataType.GetCount(); cnt++)
+		for(int cnt = 1; cnt < monsterDatabase.GetCount(); cnt++)
 		{
-			monsterData = monsterDataType.GetData(cnt.ToString());
+			monsterData = monsterDatabase.GetDataByKey(cnt.ToString());
 
 			Debug.Log(string.Format("MonsterData_{0} : Key = {1}, Name = {2}, Hp = {3}",
 			                        cnt, monsterData.Key, monsterData.Name, monsterData.Hp));
+		}
+	}
+
+
+	private void PrintWeaponData()
+	{
+		WeaponDatabase weaponDatabase = m_databaseManager.GetDatabase<WeaponDatabase>();
+		WeaponData weaponData = null;
+		
+		for(int cnt = 1; cnt < weaponDatabase.GetCount(); cnt++)
+		{
+			weaponData = weaponDatabase.GetDataByKey(cnt.ToString());
+			
+			Debug.Log(string.Format("MonsterData_{0} : Key = {1}, Name = {2}",
+			                        cnt, weaponData.Key, weaponData.Name));
+
+			for(int lv = 0; lv < weaponData.Atk.Length; lv++)
+			{
+				Debug.Log(string.Format("Lv.{0}, Atk = {1}", lv + 1, weaponData.Atk[lv]));
+			}
+
+			for(int lv = 0; lv < weaponData.Rarity.Length; lv++)
+			{
+				Debug.Log(string.Format("Lv.{0}, Rarity = {1}", lv + 1, weaponData.Rarity[lv]));
+			}
 		}
 	}
 }
