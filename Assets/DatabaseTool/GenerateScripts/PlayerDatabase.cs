@@ -36,41 +36,41 @@ namespace TEDTool.Database
 		public void Load ()
 		{
 			TextAsset textData = Resources.Load<TextAsset>(DataPath());
-			m_datas = CsvConverter.SerializeCSV(textData);
+			m_datas = CsvConverter.SerializeCSVData(textData);
 		}
 
 
 		public PlayerData GetDataByKey(string key)
 		{
-			int keyValue = 0;
+			for(int cnt = 0; cnt < m_datas.Length; cnt++)
+			{
+				if(m_datas[cnt][0] == key)
+				{
+					m_tempData.Key = m_datas[cnt][0];
 			
-			if(!int.TryParse(key, out keyValue))
-				return null;
-
-			if(keyValue >= m_datas.Length)
-				return null;
-				
-			m_tempData.Key = m_datas[keyValue][0];
-			
-			if(!int.TryParse(m_datas[keyValue][1], out m_tempData.Level))
+			if(!int.TryParse(m_datas[cnt][1], out m_tempData.Level))
 			{
 				m_tempData.Level = 0;
 			}
 
 			
-			if(!int.TryParse(m_datas[keyValue][2], out m_tempData.Hp))
+			if(!int.TryParse(m_datas[cnt][2], out m_tempData.Hp))
 			{
 				m_tempData.Hp = 0;
 			}
 
 			
-			if(!int.TryParse(m_datas[keyValue][3], out m_tempData.Exp))
+			if(!int.TryParse(m_datas[cnt][3], out m_tempData.Exp))
 			{
 				m_tempData.Exp = 0;
 			}
 
-			
-			return m_tempData;
+
+					return m_tempData;
+				}
+			}
+
+			return null;
 		}
 
 

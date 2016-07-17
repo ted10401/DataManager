@@ -36,26 +36,26 @@ namespace TEDTool.Database
 		public void Load ()
 		{
 			TextAsset textData = Resources.Load<TextAsset>(DataPath());
-			m_datas = CsvConverter.SerializeCSV(textData);
+			m_datas = CsvConverter.SerializeCSVData(textData);
 		}
 
 
 		public WeaponData GetDataByKey(string key)
 		{
-			int keyValue = 0;
-			
-			if(!int.TryParse(key, out keyValue))
-				return null;
+			for(int cnt = 0; cnt < m_datas.Length; cnt++)
+			{
+				if(m_datas[cnt][0] == key)
+				{
+					m_tempData.Key = m_datas[cnt][0];
+			m_tempData.Name = m_datas[cnt][1];
+			m_tempData.Atk = CsvConverter.ConvertToArray<int>(m_datas[cnt][2]);
+			m_tempData.Rarity = CsvConverter.ConvertToArray<string>(m_datas[cnt][3]);
 
-			if(keyValue >= m_datas.Length)
-				return null;
-				
-			m_tempData.Key = m_datas[keyValue][0];
-			m_tempData.Name = m_datas[keyValue][1];
-			m_tempData.Atk = CsvConverter.ConvertToArray<int>(m_datas[keyValue][2]);
-			m_tempData.Rarity = CsvConverter.ConvertToArray<string>(m_datas[keyValue][3]);
-			
-			return m_tempData;
+					return m_tempData;
+				}
+			}
+
+			return null;
 		}
 
 

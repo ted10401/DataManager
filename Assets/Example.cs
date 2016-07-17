@@ -21,8 +21,8 @@ public class Example : MonoBehaviour
 	{
 		PlayerDatabase playerDatabase = m_databaseManager.GetDatabase<PlayerDatabase>();
 		PlayerData playerData = null;
-		
-		for(int cnt = 1; cnt < playerDatabase.GetCount(); cnt++)
+
+		for(int cnt = 0; cnt < playerDatabase.GetCount(); cnt++)
 		{
 			playerData = playerDatabase.GetDataByKey(cnt.ToString());
 
@@ -37,7 +37,7 @@ public class Example : MonoBehaviour
 		MonsterDatabase monsterDatabase = m_databaseManager.GetDatabase<MonsterDatabase>();
 		MonsterData monsterData = null;
 		
-		for(int cnt = 1; cnt < monsterDatabase.GetCount(); cnt++)
+		for(int cnt = 0; cnt < monsterDatabase.GetCount(); cnt++)
 		{
 			monsterData = monsterDatabase.GetDataByKey(cnt.ToString());
 

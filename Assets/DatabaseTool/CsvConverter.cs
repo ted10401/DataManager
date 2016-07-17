@@ -4,16 +4,24 @@ using System;
 
 public class CsvConverter
 {
-	public static string[][] SerializeCSV(TextAsset csvData)
+	public static string[] SerializeCSVParameter(TextAsset csvData)
+	{
+		string[] lineArray = csvData.text.Replace("\n", string.Empty).Split ("\r"[0]);
+
+		return lineArray[0].Split(',');
+	}
+
+
+	public static string[][] SerializeCSVData(TextAsset csvData)
 	{
 		string[][] csv;
 		string[] lineArray = csvData.text.Replace("\n", string.Empty).Split ("\r"[0]);
 		
-		csv = new string [lineArray.Length][];
+		csv = new string [lineArray.Length - 1][];
 		
-		for(int i =0; i < lineArray.Length; i++)  
+		for(int i = 0; i < lineArray.Length - 1; i++)  
 		{  
-			csv[i] = lineArray[i].Split (',');  
+			csv[i] = lineArray[i + 1].Split (',');  
 		}
 		
 		return csv;

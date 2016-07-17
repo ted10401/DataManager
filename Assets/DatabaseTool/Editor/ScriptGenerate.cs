@@ -99,14 +99,14 @@ public class ScriptGenerate
 
 	private static string GetClassParameters(TextAsset textAsset)
 	{
-		string[][] csvData = CsvConverter.SerializeCSV(textAsset);
-		int keyCount = csvData[0].Length;
+		string[] csvParameter = CsvConverter.SerializeCSVParameter(textAsset);
+		int keyCount = csvParameter.Length;
 		
 		string classParameters = string.Empty;
 		
 		for(int cnt = 0; cnt < keyCount; cnt++)
 		{
-			string[] attributes = csvData[0][cnt].Split(new char[]{'/'}, System.StringSplitOptions.RemoveEmptyEntries);
+			string[] attributes = csvParameter[cnt].Split(new char[]{'/'}, System.StringSplitOptions.RemoveEmptyEntries);
 			classParameters += string.Format("public {0} {1};", attributes[0], attributes[1]);
 
 			if(cnt != keyCount - 1)
@@ -122,18 +122,18 @@ public class ScriptGenerate
 
 	private static string GetCsvSerialize(TextAsset textAsset)
 	{
-		string[][] csvData = CsvConverter.SerializeCSV(textAsset);
-		int keyCount = csvData[0].Length;
+		string[] csvParameter = CsvConverter.SerializeCSVParameter(textAsset);
+		int keyCount = csvParameter.Length;
 		
 		string csvSerialize = string.Empty;
 		
 		for(int cnt = 0; cnt < keyCount; cnt++)
 		{
-			string[] attributes = csvData[0][cnt].Split(new char[]{'/'}, System.StringSplitOptions.RemoveEmptyEntries);
+			string[] attributes = csvParameter[cnt].Split(new char[]{'/'}, System.StringSplitOptions.RemoveEmptyEntries);
 			
 			if(attributes[0] == "string")
 			{
-				csvSerialize += string.Format("m_tempData.{0} = m_datas[keyValue][{1}];", attributes[1], cnt);
+				csvSerialize += string.Format("m_tempData.{0} = m_datas[cnt][{1}];", attributes[1], cnt);
 			}
 			else if(attributes[0] == "bool")
 			{
@@ -149,19 +149,19 @@ public class ScriptGenerate
 			}
 			else if(attributes[0] == "string[]")
 			{
-				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<string>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<string>(m_datas[cnt][{1}]);", attributes[1], cnt);
 			}
 			else if(attributes[0] == "bool[]")
 			{
-				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<bool>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<bool>(m_datas[cnt][{1}]);", attributes[1], cnt);
 			}
 			else if(attributes[0] == "int[]")
 			{
-				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<int>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<int>(m_datas[cnt][{1}]);", attributes[1], cnt);
 			}
 			else if(attributes[0] == "float[]")
 			{
-				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<float>(m_datas[keyValue][{1}]);", attributes[1], cnt);
+				csvSerialize += string.Format("m_tempData.{0} = CsvConverter.ConvertToArray<float>(m_datas[cnt][{1}]);", attributes[1], cnt);
 			}
 			
 			if(cnt != keyCount - 1)
@@ -179,7 +179,7 @@ public class ScriptGenerate
 	{
 		string csvSerialize = "";
 		
-		csvSerialize += string.Format("\n\t\t\tif(!{0}.TryParse(m_datas[keyValue][{1}], out m_tempData.{2}))\n", attributes[0], arrayCount, attributes[1]);
+		csvSerialize += string.Format("\n\t\t\tif(!{0}.TryParse(m_datas[cnt][{1}], out m_tempData.{2}))\n", attributes[0], arrayCount, attributes[1]);
 		csvSerialize += "\t\t\t{\n";
 		csvSerialize += string.Format("\t\t\t\tm_tempData.{0} = {1};\n", attributes[1], defaultValue);
 		csvSerialize += "\t\t\t}\n";
